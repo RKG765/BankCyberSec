@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bank - Secure Banking Platform</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="styles.css" media="(min-width: 768px)">
+    <link rel="stylesheet" href="mobile.css" media="(max-width: 767px)">
+    
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Critical CSS for immediate rendering -->
+    <style>
+        body { 
+            font-family: 'Inter', Arial, sans-serif; 
+            line-height: 1.6;
+            background: #f8f9fa;
+            color: #212529;
+            margin: 0;
+            padding: 0;
+        }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0.5rem; }
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .hidden { display: none !important; }
+        .nav-button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .nav-button:first-child {
+            background-color: #004990;
+            color: white;
+        }
+        .nav-button:last-child {
+            background-color: #FFB81C;
+            color: #212529;
+        }
+        @media (max-width: 767px) {
+            .navbar { flex-direction: column; }
+            .nav-links { margin: 0.5rem 0; }
+            .hero-section { flex-direction: column; }
+            .hero-image img { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Notification Container -->
+    <div id="notification-container" class="notification-container"></div>
+
+    <div class="container">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-university"></i>
+                <h1>Bank</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#services">Services</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div id="auth-buttons" class="nav-buttons">
+                <button id="login-btn" class="nav-button">Sign In</button>
+                <button id="register-btn" class="nav-button">Open Account</button>
+            </div>
+        </nav>
+
+        <main>
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1>Welcome to Bank</h1>
+                    <p class="hero-subtitle">Your trusted partner in secure banking</p>
+                    <p class="hero-description">Experience the future of banking with our secure, fast, and reliable services. Join millions of satisfied customers who trust us with their financial needs.</p>
+                    <div class="hero-buttons">
+                        <button id="hero-register-btn" class="hero-button primary">Open Account</button>
+                        <button id="hero-login-btn" class="hero-button secondary">Sign In</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="images/banking_services.jpg" alt="Banking Services">
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section id="features" class="features-section">
+                <h2>Why Choose Bank?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Advanced Security</h3>
+                        <p>State-of-the-art encryption and security measures to protect your assets</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-bolt"></i>
+                        <h3>Instant Transfers</h3>
+                        <p>Send and receive money instantly with our lightning-fast transfer system</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Mobile Banking</h3>
+                        <p>Manage your finances on the go with our user-friendly mobile app</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-headset"></i>
+                        <h3>24/7 Support</h3>
+                        <p>Round-the-clock customer support to assist you whenever you need</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <section id="services" class="services-section">
+                <h2>Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-piggy-bank"></i>
+                        <h3>Savings Accounts</h3>
+                        <p>Earn competitive interest rates on your savings</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-credit-card"></i>
+                        <h3>Credit Cards</h3>
+                        <p>Flexible credit options with great rewards</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-home"></i>
+                        <h3>Home Loans</h3>
+                        <p>Competitive rates for your dream home</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Investment</h3>
+                        <p>Grow your wealth with our investment services</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Login/Register Forms (Hidden by default) -->
+            <div id="login-form" class="form-container hidden">
+                <div class="form-header">
+                    <h2>Sign In to Your Account</h2>
+                    <p>Welcome back to Bank</p>
+                </div>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="login-username">Username</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="login-username" placeholder="Enter your username" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="login-password" placeholder="Enter your password" required>
+                        </div>
+                    </div>
+                    <div class="form-footer">
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="submit-button">Sign In</button>
+                </form>
+            </div>
+
+            <div id="register-form" class="form-container hidden">
+                <div class="form-header">
+                    <h2>Open Your Account</h2>
+                    <p>Join Bank today</p>
+                </div>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="register-username">Username</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="register-username" placeholder="Choose a username" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="register-email" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="register-password" placeholder="Create a password" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-button">Create Account</button>
+                </form>
+            </div>
+
+            <!-- Dashboard (Hidden by default) -->
+            <div id="dashboard" class="hidden">
+                <div class="dashboard-header">
+                    <h2>Welcome, <span id="username-display"></span></h2>
+                    <div class="account-info">
+                        <span class="account-number">Account: ****1234</span>
+                        <span class="last-login">Last login: <span id="last-login-time"></span></span>
+                    </div>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>Quick Actions</h3>
+                        <div class="quick-actions">
+                            <a href="/transactions.html" class="action-button">
+                                <i class="fas fa-exchange-alt"></i>
+                                <span>Transfer Money</span>
+                            </a>
+                            <button id="view-transactions" class="action-button">
+                                <i class="fas fa-history"></i>
+                                <span>Transaction History</span>
+                            </button>
+                            <button class="action-button">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Manage Cards</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>Account Summary</h3>
+                        <div class="account-summary">
+                            <div class="balance-info">
+                                <span class="balance-label">Available Balance</span>
+                                <span id="dashboard-balance" class="balance-amount">$0.00</span>
+                            </div>
+                            <div class="recent-transactions">
+                                <h4>Recent Transactions</h4>
+                                <div id="recent-transactions-list"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>Security Alerts</h3>
+                        <div id="alerts-list"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Bank</h3>
+                    <p>Your trusted partner in secure banking</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#features">Features</a>
+                    <a href="#services">Services</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-phone"></i> +91 7079947478</p>
+                    <p><i class="fas fa-envelope"></i> support@bank.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Gurgaon,Haryana</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Bank. All rights reserved by Bank.</p>
+            </div>
+        </footer>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html> 

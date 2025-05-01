@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions - Bank Cybersecurity Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Notification Container -->
+    <div id="notification-container" class="notification-container"></div>
+
+    <div class="container">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-shield-alt"></i>
+                <h1>Bank Cybersecurity Platform</h1>
+            </div>
+            <div class="nav-buttons">
+                <button id="dashboard-btn" class="nav-button">
+                    <i class="fas fa-home"></i> Dashboard
+                </button>
+                <button id="logout-btn" class="nav-button">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </nav>
+
+        <main>
+            <div class="transactions-page">
+                <div class="page-header">
+                    <h2>Transactions</h2>
+                    <div class="balance-info">
+                        <span class="balance-label">Available Balance:</span>
+                        <span id="balance-amount" class="balance-amount">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="transactions-grid">
+                    <div class="new-transaction-section">
+                        <h3>New Transaction</h3>
+                        <form id="transactionForm" class="transaction-form">
+                            <div class="form-group">
+                                <label for="amount">Amount</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <input type="number" id="amount" placeholder="0.00" step="0.01" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient">Recipient</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="recipient" placeholder="Recipient name" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-comment"></i>
+                                    <input type="text" id="description" placeholder="Transaction description">
+                                </div>
+                            </div>
+                            <button type="submit" class="submit-button">
+                                <i class="fas fa-paper-plane"></i> Send Money
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="transaction-history-section">
+                        <div class="section-header">
+                            <h3>Transaction History</h3>
+                            <div class="filter-controls">
+                                <select id="filter-period" class="filter-select">
+                                    <option value="all">All Time</option>
+                                    <option value="today">Today</option>
+                                    <option value="week">This Week</option>
+                                    <option value="month">This Month</option>
+                                </select>
+                                <input type="text" id="search-transactions" class="search-input" placeholder="Search transactions...">
+                            </div>
+                        </div>
+                        <div id="transactions-list" class="transactions-list">
+                            <!-- Transactions will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="transactions.js"></script>
+</body>
+</html> 
