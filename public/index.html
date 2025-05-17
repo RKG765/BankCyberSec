@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Bank - Secure Banking Platform</title>
-    
+
     <!-- CSS Files -->
     <link rel="stylesheet" href="styles.css" media="(min-width: 768px)">
     <link rel="stylesheet" href="mobile.css" media="(max-width: 767px)">
-    
+
     <!-- External Resources -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Critical CSS for immediate rendering -->
     <style>
-        body { 
-            font-family: 'Inter', Arial, sans-serif; 
+        body {
+            font-family: 'Inter', Arial, sans-serif;
             line-height: 1.6;
             background: #f8f9fa;
             color: #212529;
@@ -70,10 +70,15 @@
                 <a href="#services">Services</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
+                <a href="/public/transactions.html" id="transactions-link">Transactions</a>
             </div>
             <div id="auth-buttons" class="nav-buttons">
-                <button id="login-btn" class="nav-button">Sign In</button>
-                <button id="register-btn" class="nav-button">Open Account</button>
+                <a href="signin.html" class="nav-button" id="signin-link">Sign In</a>
+                <a href="register.html" class="nav-button" id="register-link">Open Account</a>
+                <div id="user-section" class="user-controls hidden">
+                    <span id="user-greeting" class="user-greeting">Hello, User</span>
+                    <button id="logout-btn" class="nav-button">Logout</button>
+                </div>
             </div>
         </nav>
 
@@ -85,8 +90,9 @@
                     <p class="hero-subtitle">Your trusted partner in secure banking</p>
                     <p class="hero-description">Experience the future of banking with our secure, fast, and reliable services. Join millions of satisfied customers who trust us with their financial needs.</p>
                     <div class="hero-buttons">
-                        <button id="hero-register-btn" class="hero-button primary">Open Account</button>
-                        <button id="hero-login-btn" class="hero-button secondary">Sign In</button>
+                        <a href="register.html" class="hero-button primary">Open Account</a>
+                        <a href="signin.html" class="hero-button secondary">Sign In</a>
+                        <a href="transactions.html" id="hero-transactions-link" class="hero-button secondary hidden">Transactions</a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -216,7 +222,7 @@
                         <span class="last-login">Last login: <span id="last-login-time"></span></span>
                     </div>
                 </div>
-                
+
                 <div class="dashboard-grid">
                     <div class="dashboard-card">
                         <h3>Quick Actions</h3>
@@ -270,6 +276,7 @@
                     <a href="#services">Services</a>
                     <a href="#about">About</a>
                     <a href="#contact">Contact</a>
+                    <a href="transactions.html">Transactions</a>
                 </div>
                 <div class="footer-section">
                     <h4>Contact Us</h4>
@@ -285,4 +292,4 @@
     </div>
     <script src="app.js"></script>
 </body>
-</html> 
+</html>
