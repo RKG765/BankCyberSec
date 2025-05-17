@@ -5,26 +5,28 @@
 }
 
 :root {
-    --primary-color: #004990;
-    --secondary-color: #002D62;
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
     --accent-color: #FFB81C;
-    --success-color: #28a745;
+    --success-color: #2ecc71;
     --error-color: #dc3545;
-    --warning-color: #ffc107;
+    --warning-color: #f1c40f;
+    --danger-color: #e74c3c;
     --background-color: #f8f9fa;
     --card-background: #ffffff;
-    --text-color: #212529;
+    --text-color: #2c3e50;
     --text-light: #6c757d;
-    --border-color: #dee2e6;
+    --border-color: #dcdde1;
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
     --shadow: 0 4px 6px rgba(0,0,0,0.1);
     --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+    --bg-color: #f5f6fa;
 }
 
 body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    background: var(--background-color);
+    background-color: var(--bg-color);
     color: var(--text-color);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
@@ -33,7 +35,7 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 20px;
 }
 
 /* Navbar Styles */
@@ -41,10 +43,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.25rem;
+    padding: 1rem;
     background-color: var(--card-background);
-    border-radius: 0.75rem;
-    box-shadow: var(--shadow);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     margin-bottom: 2rem;
     position: sticky;
     top: 0;
@@ -56,7 +58,10 @@ body {
 .nav-brand {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
 }
 
 .nav-brand i {
@@ -76,27 +81,34 @@ body {
 }
 
 .nav-button {
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 0.5rem;
-    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
     cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.nav-button:first-child {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.nav-button:last-child {
-    background-color: var(--accent-color);
+    border: none;
+    background: none;
     color: var(--text-color);
 }
 
 .nav-button:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.user-greeting {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.user-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 /* Form Styles */
@@ -379,6 +391,17 @@ body {
     border-left-color: var(--warning-color);
 }
 
+/* Validation Error Styles */
+.validation-error {
+    color: var(--error-color);
+    background-color: rgba(220, 53, 69, 0.1);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-top: 0.75rem;
+    font-weight: 500;
+    border-left: 3px solid var(--error-color);
+}
+
 .notification i {
     font-size: 1.25rem;
     margin-top: 0.125rem;
@@ -652,6 +675,28 @@ body {
     color: var(--error-color);
 }
 
+/* Transaction history styles */
+.amount {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.amount.credit {
+    color: var(--success-color);
+}
+
+.amount.debit {
+    color: var(--error-color);
+}
+
+.date {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    display: block;
+    margin-top: 0.25rem;
+    font-style: italic;
+}
+
 /* Responsive Design for Transactions Page */
 @media (max-width: 1024px) {
     .transactions-grid {
@@ -735,29 +780,29 @@ body {
 }
 
 .hero-button {
-    padding: 1rem 2rem;
-    border-radius: 0.5rem;
-    font-size: 1.125rem;
-    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
     cursor: pointer;
-    transition: all 0.2s ease;
+    border: none;
 }
 
 .hero-button.primary {
     background-color: var(--primary-color);
     color: white;
-    border: none;
 }
 
 .hero-button.secondary {
     background-color: transparent;
-    color: var(--primary-color);
+    color: var(--text-color);
     border: 2px solid var(--primary-color);
 }
 
 .hero-button:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .hero-image {
@@ -986,4 +1031,407 @@ body {
     .hero-button {
         width: 100%;
     }
-} 
+}
+
+/* AI Validation Status */
+.ai-validation-status {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+    border: 1px solid #e9ecef;
+}
+
+.ai-validation-status.hidden {
+    display: none;
+}
+
+/* Transaction Tabs */
+.transaction-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #dcdde1;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.tab-button.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.transaction-tab-content {
+    display: block;
+}
+
+.transaction-tab-content.hidden {
+    display: none;
+}
+
+/* Balance Card */
+.balance-card {
+    background-color: var(--card-background);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.balance-card h2 {
+    color: var(--text-color);
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.balance {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* Validation Status */
+.validation-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.validation-header i {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.validation-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.validation-score {
+    text-align: center;
+}
+
+.score-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.score-label {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.validation-message {
+    flex: 1;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.ai-validation-status.safe .score-circle {
+    background-color: var(--success-color);
+}
+
+.ai-validation-status.warning .score-circle {
+    background-color: var(--warning-color);
+}
+
+.ai-validation-status.danger .score-circle {
+    background-color: var(--error-color);
+}
+
+.validation-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.validation-header i {
+    color: #3498db;
+    font-size: 1.2em;
+}
+
+.validation-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.validation-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.score-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #3498db;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Security score (default) */
+.score-circle.security-score {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+/* Fraud score (red) */
+.score-circle.fraud-score {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.score-label {
+    font-size: 0.9em;
+    color: #6c757d;
+}
+
+.validation-message {
+    flex: 1;
+    padding: 10px;
+    background: white;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+    color: #495057;
+}
+
+/* Status-specific styles */
+.ai-validation-status.safe .score-circle {
+    background: #2ecc71;
+}
+
+.ai-validation-status.warning .score-circle {
+    background: #f1c40f;
+}
+
+.ai-validation-status.danger .score-circle {
+    background: #e74c3c;
+}
+
+/* Main Content */
+.main-content {
+    display: grid;
+    gap: 2rem;
+}
+
+/* Balance Card */
+.balance-card {
+    background-color: var(--card-background);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.balance {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-top: 1rem;
+}
+
+/* Transaction Section */
+.transaction-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.new-transaction, .ai-validation {
+    background-color: var(--card-background);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+/* AI Validation */
+.validation-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: var(--bg-color);
+    border-radius: 5px;
+}
+
+.score-meter {
+    height: 10px;
+    background-color: var(--border-color);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.score-bar {
+    height: 100%;
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+.score-bar.safe { background-color: var(--success-color); }
+.score-bar.warning { background-color: var(--warning-color); }
+.score-bar.danger { background-color: var(--danger-color); }
+
+/* Transaction History */
+.transaction-history {
+    background-color: var(--card-background);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.recipient {
+    font-weight: 500;
+}
+
+.amount {
+    font-weight: bold;
+}
+
+.transaction-details {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.transaction-status {
+    font-size: 1.2rem;
+}
+
+.transaction-item.completed .amount { color: var(--success-color); }
+.transaction-item.pending .amount { color: var(--warning-color); }
+.transaction-item.failed .amount { color: var(--danger-color); }
+
+/* Notification */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    background-color: var(--card-background);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: none;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.notification.success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.notification.error {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .transaction-section {
+        grid-template-columns: 1fr;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+    }
+}

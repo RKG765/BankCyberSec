@@ -3,92 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transactions - Bank Cybersecurity Platform</title>
+    <title>Transactions - Bank Security System</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Notification Container -->
-    <div id="notification-container" class="notification-container"></div>
-
     <div class="container">
         <nav class="navbar">
-            <div class="nav-brand">
+            <div class="logo">
                 <i class="fas fa-shield-alt"></i>
-                <h1>Bank Cybersecurity Platform</h1>
+                <span>Bank Security</span>
             </div>
-            <div class="nav-buttons">
-                <button id="dashboard-btn" class="nav-button">
-                    <i class="fas fa-home"></i> Dashboard
-                </button>
-                <button id="logout-btn" class="nav-button">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </button>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="transactions.html" class="nav-link active">Transactions</a>
+            </div>
+            <div class="user-controls">
+                <span id="user-greeting" class="user-greeting">Hello, User</span>
+                <button id="logout-btn" class="nav-button">Logout</button>
             </div>
         </nav>
 
-        <main>
-            <div class="transactions-page">
-                <div class="page-header">
-                    <h2>Transactions</h2>
-                    <div class="balance-info">
-                        <span class="balance-label">Available Balance:</span>
-                        <span id="balance-amount" class="balance-amount">$0.00</span>
-                    </div>
+        <main class="main-content">
+            <div class="balance-card">
+                <h2>Current Balance</h2>
+                <div class="balance" id="currentBalance">$0.00</div>
+            </div>
+
+            <div class="transaction-section">
+                <div class="transaction-tabs">
+                    <button id="sendMoneyTab" class="tab-button active">Send Money</button>
+                    <button id="depositTab" class="tab-button">Deposit Money</button>
                 </div>
 
-                <div class="transactions-grid">
-                    <div class="new-transaction-section">
-                        <h3>New Transaction</h3>
-                        <form id="transactionForm" class="transaction-form">
+                <div id="sendMoneyForm" class="transaction-tab-content">
+                    <div class="new-transaction">
+                        <h2>Send Money</h2>
+                        <form id="transactionForm">
                             <div class="form-group">
-                                <label for="amount">Amount</label>
+                                <label for="amount">Amount ($)</label>
                                 <div class="input-with-icon">
                                     <i class="fas fa-dollar-sign"></i>
-                                    <input type="number" id="amount" placeholder="0.00" step="0.01" required>
+                                    <input type="number" id="amount" name="amount" required min="0" step="0.01">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="recipient">Recipient</label>
                                 <div class="input-with-icon">
                                     <i class="fas fa-user"></i>
-                                    <input type="text" id="recipient" placeholder="Recipient name" required>
+                                    <input type="text" id="recipient" name="recipient" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
                                 <div class="input-with-icon">
-                                    <i class="fas fa-comment"></i>
-                                    <input type="text" id="description" placeholder="Transaction description">
+                                    <i class="fas fa-info-circle"></i>
+                                    <input type="text" id="description" name="description">
                                 </div>
                             </div>
-                            <button type="submit" class="submit-button">
-                                <i class="fas fa-paper-plane"></i> Send Money
-                            </button>
+                            <button type="submit" class="btn btn-primary">Send Money</button>
                         </form>
                     </div>
 
-                    <div class="transaction-history-section">
-                        <div class="section-header">
-                            <h3>Transaction History</h3>
-                            <div class="filter-controls">
-                                <select id="filter-period" class="filter-select">
-                                    <option value="all">All Time</option>
-                                    <option value="today">Today</option>
-                                    <option value="week">This Week</option>
-                                    <option value="month">This Month</option>
-                                </select>
-                                <input type="text" id="search-transactions" class="search-input" placeholder="Search transactions...">
-                            </div>
-                        </div>
-                        <div id="transactions-list" class="transactions-list">
-                            <!-- Transactions will be loaded here -->
+                    <div class="ai-validation">
+                        <div id="validationStatus" class="ai-validation-status hidden">
+                            <!-- AI validation status will be inserted here -->
                         </div>
                     </div>
+                </div>
+
+                <div id="depositForm" class="transaction-tab-content hidden">
+                    <div class="new-transaction">
+                        <h2>Deposit Money</h2>
+                        <form id="depositMoneyForm">
+                            <div class="form-group">
+                                <label for="depositAmount">Amount ($)</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <input type="number" id="depositAmount" name="depositAmount" required min="10" step="0.01">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="depositDescription">Description (Optional)</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                    <input type="text" id="depositDescription" name="depositDescription" placeholder="e.g., Salary, Gift">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success">Deposit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="transaction-history">
+                <h2>Transaction History</h2>
+                <div id="transactionHistory">
+                    <!-- Transaction history will be inserted here -->
                 </div>
             </div>
         </main>
     </div>
+
+    <div class="notification" id="notification">
+        <i class="fas fa-info-circle"></i>
+        <span id="notificationMessage"></span>
+    </div>
+
     <script src="transactions.js"></script>
 </body>
-</html> 
+</html>

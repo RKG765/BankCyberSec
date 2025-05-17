@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Account - Bank Security System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>Bank Security</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="register.html" class="nav-link active">Open Account</a>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Open Your Account</h2>
+                    <p>Join our secure banking platform today</p>
+                </div>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="username" name="username" required placeholder="Choose a username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" name="password" required placeholder="Create a password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="initialDeposit">Initial Deposit ($)</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                            <input type="number" id="initialDeposit" name="initialDeposit" required min="100" value="1000" step="100">
+                        </div>
+                        <small class="form-text">Minimum initial deposit: $100</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                    <div class="form-footer">
+                        <p>Already have an account? <a href="index.html">Sign In</a></p>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <div class="notification" id="notification">
+        <i class="fas fa-info-circle"></i>
+        <span id="notificationMessage"></span>
+    </div>
+
+    <script src="register.js"></script>
+</body>
+</html> 

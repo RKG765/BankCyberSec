@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const loginBtn = document.getElementById('login-btn');
-    const registerBtn = document.getElementById('register-btn');
-    const heroLoginBtn = document.getElementById('hero-login-btn');
-    const heroRegisterBtn = document.getElementById('hero-register-btn');
+    const signinLink = document.getElementById('signin-link');
+    const registerLink = document.getElementById('register-link');
+    const logoutBtn = document.getElementById('logout-btn');
+    const transactionsLink = document.getElementById('transactions-link');
+    const heroTransactionsLink = document.getElementById('hero-transactions-link');
+    const userSection = document.getElementById('user-section');
+    const userGreeting = document.getElementById('user-greeting');
     const loginForm = document.getElementById('login-form');
     const registerForm = document.getElementById('register-form');
     const dashboard = document.getElementById('dashboard');
@@ -22,22 +25,22 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-            
+
             if (targetElement) {
                 // Close any open forms before scrolling
                 loginForm.classList.add('hidden');
                 registerForm.classList.add('hidden');
-                
+
                 // Scroll to the target section with smooth behavior
-                targetElement.scrollIntoView({ 
+                targetElement.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
-                
+
                 // Add active class to the clicked link
                 navLinks.forEach(nav => nav.classList.remove('active'));
                 this.classList.add('active');
-                
+
                 // Update URL hash without causing a page jump
                 history.pushState(null, null, targetId);
             }
@@ -49,11 +52,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetElement = document.querySelector(window.location.hash);
         if (targetElement) {
             setTimeout(() => {
-                targetElement.scrollIntoView({ 
+                targetElement.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
-                
+
                 // Add active class to the corresponding nav link
                 const activeLink = document.querySelector(`.nav-links a[href="${window.location.hash}"]`);
                 if (activeLink) {
@@ -84,14 +87,36 @@ document.addEventListener('DOMContentLoaded', () => {
         loginForm.classList.add('hidden');
         registerForm.classList.add('hidden');
         dashboard.classList.remove('hidden');
-        // Hide auth buttons when logged in
-        authButtons.innerHTML = `<button id="logout-btn" class="nav-button">Sign Out</button>`;
-        document.getElementById('logout-btn').addEventListener('click', logout);
-        
+
+        // Update user greeting and show user section
         if (currentUser) {
+            // Hide login/register links
+            if (signinLink) {
+                signinLink.classList.add('hidden');
+            }
+            if (registerLink) {
+                registerLink.classList.add('hidden');
+            }
+
+            // Show user section with greeting
+            if (userSection) {
+                userSection.classList.remove('hidden');
+            }
+
+            // Update user greeting
+            if (userGreeting) {
+                userGreeting.textContent = `Hello, ${currentUser.username}`;
+            }
+
+            // Make sure logout button has event listener
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', logout);
+            }
+
             usernameDisplay.textContent = currentUser.username;
             lastLoginTime.textContent = new Date().toLocaleString();
         }
+
         loadDashboardData();
     }
 
@@ -134,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                
+
                 showNotification('success', 'Welcome Back', 'You have successfully signed in');
                 showDashboard();
             } else {
@@ -187,17 +212,30 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('token');
         localStorage.removeItem('currentUser');
         currentUser = null;
-        
-        // Reset auth buttons
-        authButtons.innerHTML = `
-            <button id="login-btn" class="nav-button">Sign In</button>
-            <button id="register-btn" class="nav-button">Open Account</button>
-        `;
-        document.getElementById('login-btn').addEventListener('click', showLoginForm);
-        document.getElementById('register-btn').addEventListener('click', showRegisterForm);
-        
+
+        // Show login/register links
+        if (signinLink) {
+            signinLink.classList.remove('hidden');
+        }
+        if (registerLink) {
+            registerLink.classList.remove('hidden');
+        }
+
+        // Hide user section
+        if (userSection) {
+            userSection.classList.add('hidden');
+        }
+
+        // Hide transactions links
+        if (transactionsLink) {
+            transactionsLink.classList.add('hidden');
+        }
+        if (heroTransactionsLink) {
+            heroTransactionsLink.classList.add('hidden');
+        }
+
         showNotification('success', 'Logged Out', 'You have been logged out successfully');
-        
+
         // Hide dashboard, show hero section
         dashboard.classList.add('hidden');
         document.querySelector('.hero-section').classList.remove('hidden');
@@ -209,17 +247,57 @@ document.addEventListener('DOMContentLoaded', () => {
         const hasNumber = /\d/.test(password);
         const hasLetter = /[a-zA-Z]/.test(password);
         const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-        
+
         return password.length >= minLength && hasNumber && hasLetter && hasSpecialChar;
     }
 
     // Check if user is already logged in
     const storedToken = localStorage.getItem('token');
     const storedUser = localStorage.getItem('currentUser');
-    
+
     if (storedToken && storedUser) {
         try {
             currentUser = JSON.parse(storedUser);
+
+            // Hide login/register links
+            if (signinLink) {
+                signinLink.classList.add('hidden');
+            }
+            if (registerLink) {
+                registerLink.classList.add('hidden');
+            }
+
+            // Show user section with greeting
+            if (userSection) {
+                userSection.classList.remove('hidden');
+            }
+
+            // Update user greeting
+            if (userGreeting) {
+                userGreeting.textContent = `Hello, ${currentUser.username}`;
+            }
+
+            // Show transactions links
+            if (transactionsLink) {
+                transactionsLink.classList.remove('hidden');
+            }
+            if (heroTransactionsLink) {
+                heroTransactionsLink.classList.remove('hidden');
+            }
+
+            // Make sure user section is visible with correct greeting
+            if (userSection) {
+                userSection.classList.remove('hidden');
+            }
+            if (userGreeting) {
+                userGreeting.textContent = `Hello, ${currentUser.username}`;
+            }
+
+            // Make sure logout button has event listener
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', logout);
+            }
+
             showDashboard();
         } catch (error) {
             console.error('Error parsing stored user data:', error);
@@ -304,22 +382,22 @@ document.addEventListener('DOMContentLoaded', () => {
         transactions.forEach(transaction => {
             const transactionItem = document.createElement('div');
             transactionItem.className = 'recent-transaction-item';
-            
+
             const details = document.createElement('div');
             details.className = 'recent-transaction-details';
-            
+
             const recipient = document.createElement('div');
             recipient.className = 'recent-transaction-recipient';
             recipient.textContent = transaction.recipient || 'Unknown';
-            
+
             const description = document.createElement('div');
             description.className = 'recent-transaction-description';
             description.textContent = transaction.description || 'Transaction';
-            
+
             const amount = document.createElement('div');
             amount.className = `recent-transaction-amount ${transaction.type}`;
             amount.textContent = transaction.type === 'credit' ? `+$${transaction.amount.toFixed(2)}` : `-$${transaction.amount.toFixed(2)}`;
-            
+
             details.appendChild(recipient);
             details.appendChild(description);
             transactionItem.appendChild(details);
@@ -331,17 +409,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Display alerts from API
     function displayAlerts(alerts) {
         alertsList.innerHTML = '';
-        
+
         if (!alerts || alerts.length === 0) {
             alertsList.innerHTML = '<p class="no-alerts">No security alerts</p>';
             return;
         }
-        
+
         alerts.forEach(alert => {
             const alertElement = document.createElement('div');
-            alertElement.className = `alert-item ${alert.eventType === 'suspicious_transaction' ? 'error' : 
+            alertElement.className = `alert-item ${alert.eventType === 'suspicious_transaction' ? 'error' :
                 alert.eventType === 'security_alert' ? 'warning' : 'success'}`;
-            
+
             let icon;
             switch(alert.eventType) {
                 case 'suspicious_transaction':
@@ -353,12 +431,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 default:
                     icon = 'fa-info-circle';
             }
-            
+
             alertElement.innerHTML = `
                 <i class="fas ${icon}"></i>
                 <div>${alert.details}</div>
             `;
-            
+
             alertsList.appendChild(alertElement);
         });
     }
@@ -376,22 +454,22 @@ document.addEventListener('DOMContentLoaded', () => {
         mockTransactions.forEach(transaction => {
             const transactionItem = document.createElement('div');
             transactionItem.className = 'recent-transaction-item';
-            
+
             const details = document.createElement('div');
             details.className = 'recent-transaction-details';
-            
+
             const recipient = document.createElement('div');
             recipient.className = 'recent-transaction-recipient';
             recipient.textContent = transaction.recipient;
-            
+
             const description = document.createElement('div');
             description.className = 'recent-transaction-description';
             description.textContent = transaction.description;
-            
+
             const amount = document.createElement('div');
             amount.className = `recent-transaction-amount ${transaction.type}`;
             amount.textContent = transaction.type === 'credit' ? `+$${transaction.amount.toFixed(2)}` : `-$${transaction.amount.toFixed(2)}`;
-            
+
             details.appendChild(recipient);
             details.appendChild(description);
             transactionItem.appendChild(details);
@@ -408,12 +486,12 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         alertsList.innerHTML = '';
-        
+
         mockAlerts.forEach(alert => {
             const alertElement = document.createElement('div');
-            alertElement.className = `alert-item ${alert.eventType === 'suspicious_transaction' ? 'error' : 
+            alertElement.className = `alert-item ${alert.eventType === 'suspicious_transaction' ? 'error' :
                 alert.eventType === 'security_alert' ? 'warning' : 'success'}`;
-            
+
             let icon;
             switch(alert.eventType) {
                 case 'suspicious_transaction':
@@ -425,12 +503,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 default:
                     icon = 'fa-info-circle';
             }
-            
+
             alertElement.innerHTML = `
                 <i class="fas ${icon}"></i>
                 <div>${alert.details}</div>
             `;
-            
+
             alertsList.appendChild(alertElement);
         });
     }
@@ -440,7 +518,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById('notification-container');
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
-        
+
         let icon;
         switch(type) {
             case 'error':
@@ -468,7 +546,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         container.appendChild(notification);
-        
+
         // Remove notification after 5 seconds
         setTimeout(() => {
             if (notification.parentNode) {
@@ -491,4 +569,4 @@ document.addEventListener('DOMContentLoaded', () => {
             showNotification('warning', 'Card Management', 'This feature is coming soon!');
         });
     }
-}); 
+});
