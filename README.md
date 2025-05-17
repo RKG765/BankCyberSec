@@ -130,4 +130,12 @@ Feel free to submit issues and enhancement requests.
 
 ## 📄 License
 
-This project is licensed under the MIT License. 
+This project is licensed under the MIT License.
+
+## 🗺️ Future Roadmap
+
+- 🔮 AI-Powered Fraud Detection System
+- 🌐 Multi-language Support
+- 📱 Mobile App Development
+- 💳 Cryptocurrency Integration
+- 🔐 Biometric Authentication 
